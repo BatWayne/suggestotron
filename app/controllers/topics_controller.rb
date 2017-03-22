@@ -64,7 +64,11 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.votes.create
     redirect_to (topics_path)
-
+end
+  def downvote
+    @topic = Topic.find(params[:id])
+    @topic.votes.last.destroy if @topic.votes.count > 0
+    redirect_to (topics_path)
  end
   private
     # Use callbacks to share common setup or constraints between actions.
